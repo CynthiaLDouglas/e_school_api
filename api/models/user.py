@@ -32,7 +32,7 @@ class UserManager(BaseUserManager):
         # We'll also unwind the extra fields.  Remember that two asterisk (**)
         # in Python refers to the extra keyword arguments that are passed into
         # a function (meaning these are key=value pairs).
-        user = self.model(email=self.normalize_email(email), **extra_fields)
+        user = self.model(email=self.normalize_email(email), first_name=first_name, last_name=last_name, role_in_school=role_in_school, password=password, **extra_fields)
 
         # Use the set_password method to hash the password
         user.set_password(password)
@@ -47,7 +47,7 @@ class UserManager(BaseUserManager):
 
         # Use the custom create_user method above to create
         # the user.
-        user = self.create_user(email, first_name, last_name, role_in_school, password)
+        user = self.create_user(email, first_name=first_name, last_name=last_name, role_in_school=role_in_school, password=password)
 
         # Add the required is_superuser and is_staff properties
         # which must be set to True for superusers
