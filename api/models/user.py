@@ -14,11 +14,17 @@ class UserManager(BaseUserManager):
     #            This ensures the proper error is thrown if a password is
     #            not provided.
     # **extra_fields:  Just in case there are extra arguments passed.
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email, first_name, last_name, role_in_school, password=None, **extra_fields):
         """Create a new user profile"""
         # Add a custom validation error
         if not email:
             raise ValueError('User must have an email address')
+        if not role_in_school:
+            raise ValueError('User must have be assigned a role')
+        if not last_name:
+            raise ValueError('User must have a last name')
+        if not first_name:
+            raise ValueError('User must have a first name')
 
         # Create a user from the UserModel
         # Use the normalize_email method from the BaseUserManager to
@@ -36,12 +42,12 @@ class UserManager(BaseUserManager):
         # Always return the user!
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, first_name, last_name, role_in_school, password):
         """Create and save a new superuser with given details"""
 
         # Use the custom create_user method above to create
         # the user.
-        user = self.create_user(email, password)
+        user = self.create_user(email, first_name, last_name, role_in_school, password)
 
         # Add the required is_superuser and is_staff properties
         # which must be set to True for superusers
@@ -59,27 +65,40 @@ class User(AbstractBaseUser, PermissionsMixin):
     # As with any Django models, we need to define the fields
     # for the model with the type and options:
     email = models.EmailField(max_length=255, unique=True)
-    # name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255, blank=True)
+    last_name = models.CharField(max_length=255, blank=True)
+    TEACHER = 'TR'
+    STUDENT = 'ST'
+    ROLE_IN_SCHOOL_CHOICES = [
+          (TEACHER, 'Teacher'),
+          (STUDENT, 'Student'),
+      ]
+    role_in_school = models.CharField(
+          max_length=2,
+          choices=ROLE_IN_SCHOOL_CHOICES,
+          default=STUDENT,
+      )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
     # Any time we call User.objects (such as in objects.all() or objects.filter())
     # make sure to use the custom user manager we created.
     objects = UserManager()
-
     # Tell Django to use the email field as the unique identifier for the
     # user account instead of its built in behavior of using the username.
     USERNAME_FIELD = 'email'
     # This doesn't mean the field is required (that's defined above in the field options)
     # This refers to the fields that are prompted for when creating a superuser.
     # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#django.contrib.auth.models.CustomUser.REQUIRED_FIELDS
-    # REQUIRED_FIELDS = ['name']
+    REQUIRED_FIELDS = ['first_name', 'last_name', 'role_in_school']
+
+
 
     # Standard Python: We'll create a string representation so when
     # the class is output we'll get something meaningful.
     def __str__(self):
         """Return string representation of the user"""
-        return self.email
+        return f"The user named '{self.last_name}', '{self.first_name}' has been added. Email: {self.email}, Role: {self.role_in_school}."
 
     def get_auth_token(self, obj):
         Token.objects.filter(user=obj).delete()

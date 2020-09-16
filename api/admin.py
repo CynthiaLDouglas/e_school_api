@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
 from .models.user import User
 from .models.mango import Mango
+from .models.course import Course
 
 class UserAdmin(BaseUserAdmin):
     ordering = ['id']
@@ -15,7 +16,7 @@ class UserAdmin(BaseUserAdmin):
     # fieldset including the list of fields.
     # Below we're saying create 4 sections, the first section has no name specified
     fieldsets = (
-      (None, {'fields': ('email', 'password')}),
+      (None, {'fields': ('first_name', 'last_name', 'role_in_school', 'email', 'password')}),
       ('Permissions',
           {
               'fields': (
@@ -40,3 +41,4 @@ class UserAdmin(BaseUserAdmin):
 # class to format the pages:
 admin.site.register(User, UserAdmin)
 admin.site.register(Mango)
+admin.site.register(Course)

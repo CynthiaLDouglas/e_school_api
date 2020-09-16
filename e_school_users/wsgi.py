@@ -1,5 +1,5 @@
 """
-WSGI config for e_schools_users_template project.
+WSGI config for e_school_users_template project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'e_schools_users.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'e_school_users.settings')
 
 application = get_wsgi_application()

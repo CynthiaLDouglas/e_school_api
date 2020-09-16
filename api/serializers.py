@@ -2,12 +2,18 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from .models.mango import Mango
+from .models.course import Course
 from .models.user import User
 
 class MangoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mango
         fields = ('id', 'name', 'color', 'ripe', 'owner')
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('id', 'first name', 'last name', 'email', 'Role', 'Created on', 'Assigned teacher')
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation
