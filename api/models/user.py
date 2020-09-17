@@ -98,7 +98,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # the class is output we'll get something meaningful.
     def __str__(self):
         """Return string representation of the user"""
-        return f"The user named '{self.last_name}', '{self.first_name}' has been added. Email: {self.email}, Role: {self.role_in_school}."
+        return f"Owner: '{self.last_name}', '{self.first_name}' Role: '{self.role_in_school}'."
 
     def get_auth_token(self, obj):
         Token.objects.filter(user=obj).delete()

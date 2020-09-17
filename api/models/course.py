@@ -31,7 +31,7 @@ class Course(models.Model):
 
     def __str__(self):
       # This must return a string
-        return f"The course named '{self.name}' has been created on '{self.created_at}' for subject are {self.subject}."
+        return self.name
 
     def as_dict(self):
         """Returns dictionary version of Mango models"""

@@ -13,7 +13,7 @@ class MangoSerializer(serializers.ModelSerializer):
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('id', 'first name', 'last name', 'email', 'Role', 'Created on', 'Assigned teacher')
+        fields = ('id', 'name', 'subject', 'course_description', 'owner')
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation
