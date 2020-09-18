@@ -36,8 +36,11 @@ class UserLoginSerializer(UserSerializer):
     password = serializers.CharField(required=True, write_only=True)
 
 class UserRegisterSerializer(serializers.Serializer):
-    # Require email, password, and password_confirmation for sign up
+    # Require email, first_name, last_name, role_in_school, password, and password_confirmation for sign up
     email = serializers.CharField(max_length=300, required=True)
+    first_name = serializers.CharField(max_length=255)
+    last_name = serializers.CharField(max_length=255)
+    role_in_school = serializers.CharField()
     password = serializers.CharField(required=True)
     password_confirmation = serializers.CharField(required=True, write_only=True)
 

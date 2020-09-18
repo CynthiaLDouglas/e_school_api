@@ -14,17 +14,17 @@ class UserManager(BaseUserManager):
     #            This ensures the proper error is thrown if a password is
     #            not provided.
     # **extra_fields:  Just in case there are extra arguments passed.
-    def create_user(self, email, password=None, **extra_fields):
+    def create_user(self, email, first_name,last_name, role_in_school, password=None, **extra_fields):
         """Create a new user profile"""
         # Add a custom validation error
         if not email:
             raise ValueError('User must have an email address')
-        if not role_in_school:
-            raise ValueError('User must have be assigned a role')
         if not last_name:
             raise ValueError('User must have a last name')
         if not first_name:
             raise ValueError('User must have a first name')
+        if not role_in_school:
+            raise ValueError('User must have be assigned a role')
 
         # Create a user from the UserModel
         # Use the normalize_email method from the BaseUserManager to

@@ -19,7 +19,7 @@ class Courses(generics.ListCreateAPIView):
         # Get all the mangos:
         # mangos = Mango.objects.all()
         # Filter the mangos by owner, so you can only see your owned mangos
-        courses = Course.objects.filter(owner=request.user.id)
+        courses = Course.objects.all()
         # Run the data through the serializer
         data = CourseSerializer(courses, many=True).data
         return Response({ 'courses': data })
@@ -46,7 +46,7 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
         course = get_object_or_404(Course, pk=pk)
         # Only want to show owned mangos?
         if not request.user.id == course.owner.id:
-            raise PermissionDenied('Unauthorized, you do not own this mango')
+            raise PermissionDenied('Unauthorized, you did not create this course.')
 
         # Run the data through the serializer so it's formatted
         data = CourseSerializer(course).data
