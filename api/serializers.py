@@ -30,6 +30,9 @@ class UserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         return get_user_model().objects.create_user(**validated_data)
 
+class CourseReadSerializer(CourseSerializer):
+     owner = UserSerializer(read_only=True)
+
 class UserLoginSerializer(UserSerializer):
     # Require email, password for sign in
     email = serializers.CharField(max_length=300, required=True)

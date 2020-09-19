@@ -8,7 +8,7 @@ from django.contrib.auth import get_user, authenticate, login, logout
 from django.middleware.csrf import get_token
 
 from ..models.course import Course
-from ..serializers import CourseSerializer, UserSerializer
+from ..serializers import CourseSerializer, UserSerializer, CourseReadSerializer
 
 # Create your views here.
 class Courses(generics.ListCreateAPIView):
@@ -21,7 +21,7 @@ class Courses(generics.ListCreateAPIView):
         # Filter the mangos by owner, so you can only see your owned mangos
         courses = Course.objects.all()
         # Run the data through the serializer
-        data = CourseSerializer(courses, many=True).data
+        data = CourseReadSerializer(courses, many=True).data
         return Response({ 'courses': data })
 
     def post(self, request):
@@ -49,7 +49,7 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
             raise PermissionDenied('Unauthorized, you did not create this course.')
 
         # Run the data through the serializer so it's formatted
-        data = CourseSerializer(course).data
+        data = CourseReadSerializer(course).data
         return Response({ 'course': data })
 
     def delete(self, request, pk):
