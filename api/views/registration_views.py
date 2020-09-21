@@ -8,7 +8,7 @@ from django.contrib.auth import get_user, authenticate, login, logout
 from django.middleware.csrf import get_token
 
 from ..models.course import Course
-from ..models.registration import Registrataion
+from ..models.registration import Registration
 from ..serializers import CourseSerializer, UserSerializer, CourseReadSerializer, RegistrationSerializer
 # Create your views here.
 class Registrations(generics.ListCreateAPIView):
@@ -27,7 +27,7 @@ class Registrations(generics.ListCreateAPIView):
     def post(self, request):
         """Create request"""
         # Add user to request data object
-        # request.data['course']['oegistrationwner'] = request.user.id
+        request.data['registration']['owner'] = request.user.id
         # Serialize/create mango
         registration = RegistrationSerializer(data=request.data['registration'])
         # If the mango data is valid according to our serializer...

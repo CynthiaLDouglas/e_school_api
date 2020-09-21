@@ -18,8 +18,8 @@ class CourseSerializer(serializers.ModelSerializer):
 
 class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Course
-        fields = ('id', 'semester', 'course_name', 'student_enrolled')
+        model = Registration
+        fields = ('id', 'semester', 'course_name', 'student_enrolled', 'owner')
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation
