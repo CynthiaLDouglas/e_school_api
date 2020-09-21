@@ -56,10 +56,11 @@ class CourseDetail(generics.RetrieveUpdateDestroyAPIView):
         """Delete request"""
         # Locate mango to delete
         course = get_object_or_404(Course, pk=pk)
-        # Check the mango's owner agains the user making this request
-        if not request.user.id == course.owner.id:
-            raise PermissionDenied('Unauthorized, you do not own this mango')
+        # Check the mango's owner against the user making this request
+        # if not request.user.id == course.owner.id:
+        #     raise PermissionDenied('Unauthorized, you do not own this mango')
         # Only delete if the user owns the  mango
+        data = CourseSerializer(course).data
         course.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 

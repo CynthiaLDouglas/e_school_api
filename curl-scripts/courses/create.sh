@@ -9,7 +9,7 @@ curl "http://localhost:8000/courses/" \
     "course": {
       "name": "'"${NAME}"'",
       "subject": "'"${SUBJECT}"'",
-      "course_description": "'"${COURSE_DESCRIPTION}"'"
+      "student_enrolled": "'"${STUDENT_ENROLLED}"'"
     }
   }'
 

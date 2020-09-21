@@ -6,10 +6,10 @@ from django.contrib.auth import get_user_model
 # https://docs.djangoproject.com/en/3.0/ref/models/fields/
 class Course(models.Model):
     name = models.CharField(max_length=100)
-    MATH = 'MT'
-    SCIENCE = 'SC'
-    HUMANITIES = 'HM'
-    ENGLISH = 'EN'
+    MATH = 'Math'
+    SCIENCE = 'Science'
+    HUMANITIES = 'Humanities'
+    ENGLISH = 'English'
     SUBJECT_CHOICES = [
           (MATH, 'Math'),
           (SCIENCE, 'Science'),
@@ -17,7 +17,7 @@ class Course(models.Model):
           (ENGLISH, 'English'),
       ]
     subject = models.CharField(
-          max_length=2,
+          max_length=12,
           choices=SUBJECT_CHOICES,
           default=HUMANITIES,
       )

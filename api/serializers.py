@@ -4,6 +4,7 @@ from rest_framework import serializers
 from .models.mango import Mango
 from .models.course import Course
 from .models.user import User
+from .models.registration import Registration
 
 class MangoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,6 +15,11 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id', 'name', 'subject', 'course_description', 'owner')
+
+class RegistrationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('id', 'semester', 'course_name', 'student_enrolled')
 
 class UserSerializer(serializers.ModelSerializer):
     # This model serializer will be used for User creation
