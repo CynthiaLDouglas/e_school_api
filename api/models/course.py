@@ -30,9 +30,10 @@ class Course(models.Model):
   )
 
     def __str__(self):
-      # This must return a string
+      # This returns a string
         return self.name
 
+    # No longer needed....
     def as_dict(self):
         """Returns dictionary version of Mango models"""
         return {

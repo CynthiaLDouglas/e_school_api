@@ -5,7 +5,6 @@ from rest_framework.authtoken.models import Token
 
 class UserManager(BaseUserManager):
     """Manager for user profiles"""
-
     # The create_user method is passed:
     # self:      All methods in Python receive the class as the first argument
     # email:     Because we want to be able to log users in with email
@@ -90,6 +89,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # This doesn't mean the field is required (that's defined above in the field options)
     # This refers to the fields that are prompted for when creating a superuser.
     # https://docs.djangoproject.com/en/3.0/topics/auth/customizing/#django.contrib.auth.models.CustomUser.REQUIRED_FIELDS
+    # Updated to include all fields required.
     REQUIRED_FIELDS = ['first_name', 'last_name', 'role_in_school']
 
 
