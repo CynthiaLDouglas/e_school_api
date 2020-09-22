@@ -6,9 +6,10 @@ curl "http://localhost:8000/registrations/${ID}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Token ${TOKEN}" \
   --data '{
-    "registrations": {
-      "course_name": "'"${NAME}"'",
-      "student_enrolled": "'"${STUDENT_ENROLLED}"'",
+    "registration": {
+      "semester": "'"${SEMESTER}"'",
+      "course_name": "'"${COURSE_NAME}"'",
+      "student_enrolled": "'"${STUDENT_ENROLLED}"'"
     }
   }'
 

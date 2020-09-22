@@ -39,6 +39,11 @@ class UserSerializer(serializers.ModelSerializer):
 class CourseReadSerializer(CourseSerializer):
      owner = UserSerializer(read_only=True)
 
+class RegistrationReadSerializer(RegistrationSerializer):
+     course_name = CourseSerializer(read_only=True)
+     student_enrolled = UserSerializer(read_only=True)
+     owner = UserSerializer(read_only=True)
+
 class UserLoginSerializer(UserSerializer):
     # Require email, password for sign in
     email = serializers.CharField(max_length=300, required=True)

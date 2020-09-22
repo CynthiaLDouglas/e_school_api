@@ -9,7 +9,7 @@ from django.middleware.csrf import get_token
 
 from ..models.course import Course
 from ..models.registration import Registration
-from ..serializers import CourseSerializer, UserSerializer, CourseReadSerializer, RegistrationSerializer
+from ..serializers import CourseSerializer, UserSerializer, CourseReadSerializer, RegistrationSerializer, RegistrationReadSerializer
 # Create your views here.
 class Registrations(generics.ListCreateAPIView):
     permission_classes=(IsAuthenticated,)
@@ -21,7 +21,7 @@ class Registrations(generics.ListCreateAPIView):
         # Filter the mangos by owner, so you can only see your owned mangos
         registrations = Registration.objects.all()
         # Run the data through the serializer
-        data = RegistrationSerializer(registrations, many=True).data
+        data = RegistrationReadSerializer(registrations, many=True).data
         return Response({ 'registrations': data })
 
     def post(self, request):
